@@ -18,6 +18,8 @@ Once cloned the git repo just change the path to executables in file biblio_scri
 	SAXON_PATH="/Applications/saxonhe9-2-1-2j/saxon9he.jar"
 
 ## Usage ##
+
+You can try out the script using the provieded input_sample.txt file:
 	./biblio_script.sh <inputFile> <outDir>
 	
 ## Caveat ##
