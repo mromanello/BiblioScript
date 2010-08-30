@@ -13,3 +13,6 @@ BiblioScript
 
 	./biblio_script.sh <inputFile> <outDir>
 	
+## Caveat ##
+
+The degree of accuracy of the resulting .bib file is depending (and it might vary from version to version) on the ParsCit engine used to parse the unstructured (plain text) bibliography.
