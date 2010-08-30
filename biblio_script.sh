@@ -6,10 +6,10 @@ import os,sys
 # paths to executables 
 PARSCIT_PATH="/Applications/ParsCit/bin/"
 BIBUTILS_PATH="/Applications/bibutils_4.8/"
-SAXON_PATH="/56k/Downloads/saxonhe9-2-1-2j/saxon9he.jar"
+SAXON_PATH="/Applications/saxonhe9-2-1-2j/saxon9he.jar"
 
 # paths to resources
-XSLT_TRANFORM_PATH="/56k/Documents/Research/training_parscit/xslt/parscit2mods.xsl"
+XSLT_TRANFORM_PATH="./parscit2mods.xsl"
 
 def parscit_to_mods(parscit_out):
 	saxon_cmd="java -jar %s -xsl:%s -s:%s" %(SAXON_PATH,XSLT_TRANFORM_PATH,parscit_out)
