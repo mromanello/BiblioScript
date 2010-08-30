@@ -10,6 +10,8 @@
             <xsl:apply-templates select="citation[journal]"/>
             <xsl:comment> ### BOOKS ### </xsl:comment>
             <xsl:apply-templates select="citation[title and not(booktitle) and not(pages) and not(journal)]"/>
+            <xsl:comment> ### BOOK SECTIONS ### </xsl:comment>
+            <xsl:apply-templates select="citation[title and booktitle and not(journal)]"/>
         </xsl:element>
     </xsl:template>
     <xd:doc> Here is where most of the inetersting stuff happen. </xd:doc>
@@ -20,6 +22,7 @@
                 <xsl:value-of select="generate-id()"/>
             </xsl:attribute>
             <xsl:apply-templates select="title"/>
+            <xsl:element name="typeOfResource" namespace="http://www.loc.gov/mods/v3">text</xsl:element>
             <!-- heuristic to determine the kind of resource -->
             <xsl:choose>
                 <!-- CASE 1: Paper in a Journal-->
@@ -31,9 +34,7 @@
                         <xsl:element name="originInfo" namespace="http://www.loc.gov/mods/v3">
                             <xsl:element name="issuance" namespace="http://www.loc.gov/mods/v3">continuing</xsl:element>
                         </xsl:element>
-                        <xsl:element name="part" namespace="http://www.loc.gov/mods/v3">
-                            <xsl:apply-templates select="*[name()!='authors'][name()!='journal']" mode="journal_article"/>
-                        </xsl:element>
+                        <xsl:apply-templates select="pages" mode="all"/>
                         <xsl:element name="genre" namespace="http://www.loc.gov/mods/v3">
                             <xsl:attribute name="authority">marc</xsl:attribute>
                             <xsl:text>journal</xsl:text>
@@ -41,6 +42,7 @@
                         <xsl:element name="genre" namespace="http://www.loc.gov/mods/v3">
                             <xsl:text>academic journal</xsl:text>
                         </xsl:element>
+
                     </xsl:element>
                 </xsl:when>
                 <!-- CASE 2: Book -->
@@ -49,13 +51,26 @@
                     <xsl:element name="originInfo" namespace="http://www.loc.gov/mods/v3">
                         <xsl:apply-templates select="location | date | publisher" mode="book"/>
                         <xsl:element name="issuance" namespace="http://www.loc.gov/mods/v3">monographic</xsl:element>
+                        <xsl:apply-templates select="pages" mode="all"/>
                     </xsl:element>
                 </xsl:when>
+                <!-- CASE 3: Book Section -->
                 <xsl:otherwise>
-                    <xsl:apply-templates select="*[name()!='authors']"/>
+                    <xsl:apply-templates select="authors" mode="book_section"/>
+                    <xsl:element name="relatedItem" namespace="http://www.loc.gov/mods/v3">
+                        <xsl:attribute name="type">host</xsl:attribute>
+                        <xsl:apply-templates select="pages | booktitle" mode="all"/>
+                        <xsl:apply-templates select="editor">
+                            <xsl:with-param name="mode">book_editor</xsl:with-param>
+                        </xsl:apply-templates>
+                        <xsl:element name="originInfo" namespace="http://www.loc.gov/mods/v3">
+                            <xsl:element name="issuance" namespace="http://www.loc.gov/mods/v3">monographic</xsl:element>
+                            <xsl:apply-templates select="location | date | publisher" mode="book"/>
+                        </xsl:element>
+                        <xsl:element name="genre" namespace="http://www.loc.gov/mods/v3">collection</xsl:element>
+                    </xsl:element>
                 </xsl:otherwise>
             </xsl:choose>
-            <!--<xsl:element name="typeOfResource" namespace="http://www.loc.gov/mods/v3">text</xsl:element>-->
             <xsl:element name="identifier" namespace="http://www.loc.gov/mods/v3">
                 <xsl:attribute name="type">citekey</xsl:attribute>
                 <xsl:value-of select="generate-id()"/>
@@ -74,9 +89,14 @@
             <xsl:with-param name="mode">book</xsl:with-param>
         </xsl:apply-templates>
     </xsl:template>
+    <xsl:template match="authors" mode="book_section">
+        <xsl:apply-templates select="author">
+            <xsl:with-param name="mode">book_section</xsl:with-param>
+        </xsl:apply-templates>
+    </xsl:template>
     <xd:doc>Handles the creation of name elements in mods format. <xd:param type="string">The current mode.</xd:param>
     </xd:doc>
-    <xsl:template match="author">
+    <xsl:template match="author|editor">
         <xsl:param name="mode"/>
         <xsl:element name="name" namespace="http://www.loc.gov/mods/v3">
             <xsl:attribute name="type">personal</xsl:attribute>
@@ -104,6 +124,12 @@
                         <xsl:when test="$mode='book'">
                             <xsl:text>creator</xsl:text>
                         </xsl:when>
+                        <xsl:when test="$mode='book_section'">
+                            <xsl:text>author</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="$mode='book_editor'">
+                            <xsl:text>editor</xsl:text>
+                        </xsl:when>
                     </xsl:choose>
                 </xsl:element>
             </xsl:element>
@@ -122,14 +148,16 @@
     <xsl:template match="journal" mode="journal_article">
         <xsl:call-template name="title"/>
     </xsl:template>
-    <xsl:template match="pages" mode="journal_article">
-        <xsl:element name="extent" namespace="http://www.loc.gov/mods/v3">
-            <xsl:attribute name="unit">page</xsl:attribute>
-            <xsl:element name="start" namespace="http://www.loc.gov/mods/v3">
-                <xsl:value-of select="tokenize(.,'--')[1]"/>
-            </xsl:element>
-            <xsl:element name="end" namespace="http://www.loc.gov/mods/v3">
-                <xsl:value-of select="tokenize(.,'--')[2]"/>
+    <xsl:template match="pages" mode="all">
+        <xsl:element name="part" namespace="http://www.loc.gov/mods/v3">
+            <xsl:element name="extent" namespace="http://www.loc.gov/mods/v3">
+                <xsl:attribute name="unit">page</xsl:attribute>
+                <xsl:element name="start" namespace="http://www.loc.gov/mods/v3">
+                    <xsl:value-of select="tokenize(.,'--')[1]"/>
+                </xsl:element>
+                <xsl:element name="end" namespace="http://www.loc.gov/mods/v3">
+                    <xsl:value-of select="tokenize(.,'--')[2]"/>
+                </xsl:element>
             </xsl:element>
         </xsl:element>
     </xsl:template>
@@ -157,6 +185,13 @@
     <xsl:template match="date" mode="book">
         <xsl:element name="dateIssued" namespace="http://www.loc.gov/mods/v3">
             <xsl:value-of select="."/>
+        </xsl:element>
+    </xsl:template>
+    <xsl:template match="booktitle" mode="all">
+        <xsl:element name="titleInfo" namespace="http://www.loc.gov/mods/v3">
+            <xsl:element name="title" namespace="http://www.loc.gov/mods/v3">
+                <xsl:value-of select="."/>
+            </xsl:element>
         </xsl:element>
     </xsl:template>
     <xsl:template match="publisher" mode="book">
