@@ -1,0 +1,3 @@
+Pietra, P.V. deSouza, J.C. Lai, and R.L. Mercer. 1990. Class-based n-gram Models of Natural Language. Computational Linguistics, 16(2):79.85.
+Y. Choueka and S. Lusignan. 1985. Disambiguation by Short Contexts. Computer and the Humanities, 19:147.157.
+K. Church and P. Hanks. 1989. Word Association Norms, Mutual Information, and Lexicography. In Proceedings of ACL-89, pages 76.83, Vancouver, British Columbia, Canada.
