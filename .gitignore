@@ -5,3 +5,5 @@ git_commit.sh
 *swp
 *~
 tmp/*
+test/*.cite
+test/*.body
