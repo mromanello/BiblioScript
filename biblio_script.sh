@@ -6,7 +6,7 @@ import os,sys,getopt,re
 # paths to executables 
 # Thang v100901: minor modifications in the code so that it doesn't matter if the below directory paths end with / or not
 PARSCIT_PATH="/Applications/ParsCit/bin/"
-BUTILS_PATH="/Applications/bibutils_4.8/"
+IBUTILS_PATH="/Applications/bibutils_4.8/"
 SAXON_PATH="/Applications/saxonhe9-2-1-2j/saxon9he.jar"
 
 # paths to resources
@@ -61,10 +61,17 @@ def process_argv(argv):
     else:
       assert False, "unhandled mode"
 
+  inp_file = ""
+  out_dir = ""
   if(len(args) > 1):
     inp_file = args[0]
     out_dir = args[1]
  
+  if(inp_file == "" or out_dir == ""):
+    sys.stderr.write("#! Empty inp_file \"%s\" or out_dir \"%s\"" %(inp_file, out_dir))
+    usage()
+    sys.exit(1)
+
   sys.stderr.write("# (mode, outputType, inputFile, outDir) = (\"%s\", \"%s\", \"%s\", \"%s\")\n" %(mode, out_type, inp_file, out_dir))
 
   # check if the input file exists

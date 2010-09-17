@@ -1,0 +1,224 @@
+TY  - JOUR
+AU  - Brown, P. F.
+AU  - Pietra, Della V. J.
+AU  - deSouza, P. V.
+AU  - Lai, J. C.
+AU  - Mercer, R. L.
+TI  - Class-based n-gram Models of Natural Language
+JO  - Computational Linguistics
+ID  - d1e7
+ER  - 
+TY  - JOUR
+AU  - Karypis, G.
+AU  - Han, E-H
+AU  - Kumar, V.
+TI  - Chameleon: A Hierarchical Clustering Algorithm using Dynamic Modeling
+JO  - IEEE Computer. Special Issue on Data Analysis and Mining
+ID  - d1e475
+ER  - 
+TY  - JOUR
+AU  - Light, M.
+AU  - Mann, G.
+AU  - Riloff, E.
+AU  - Breck, E.
+TI  - Analyses for Elucidating Current Question Answering Technology
+JO  - Natural Language Engineering
+ID  - d1e606
+ER  - 
+TY  - JOUR
+AU  - Lin, D.
+AU  - Pantel, P.
+TI  - Discovery of Inference Rules for Question Answering
+JO  - Natural Language Engineering
+ID  - d1e649
+ER  - 
+TY  - JOUR
+AU  - Maynard, D.
+AU  - Tablan, V.
+AU  - Cunningham, H.
+AU  - Ursu, C.
+AU  - Saggion, H.
+AU  - Bontcheva, K.
+AU  - Wilks, Y.
+JO  - Architectural Elements of Language Engineering Robustness. Natural Language Engineering
+SP  - 8
+EP  - 2
+ID  - d1e758
+ER  - 
+TY  - STD
+AU  - Fellbaum, C.
+PY  - 1998//
+TI  - WordNet. An Electronic Lexical Database
+PB  - MIT Press
+CY  - Cambridge, Massachusetts
+ID  - d1e273
+ER  - 
+TY  - STD
+AU  - Li, X.
+AU  - Roth, D.
+PY  - 2002//
+TI  - Learning Question Classifiers
+ID  - d1e558
+ER  - 
+TY  - CHAP
+AU  - Church, K.
+AU  - Hanks, P.
+PY  - 1989//
+TI  - Word Association Norms, Mutual Information, and Lexicography
+BT  - In Proceedings of ACL-89
+SP  - 76
+EP  - 83
+CY  - Vancouver, British Columbia, Canada
+ID  - d1e87
+ER  - 
+TY  - CHAP
+AU  - Cutting, D. R.
+AU  - Karger, D.
+AU  - Pedersen, J.
+AU  - Tukey, J. W.
+PY  - 1992//
+TI  - Scatter/Gather: A Cluster-based Approach to Browsing Large Document Collections
+BT  - In Proceedings of SIGIR92
+SP  - 318
+EP  - 329
+CY  - Copenhagen, Denmark
+ID  - d1e173
+ER  - 
+TY  - CHAP
+AU  - Echihabi, A.
+AU  - Hermjakob, U.
+AU  - Hovy, E.
+AU  - Marcu, D.
+AU  - Melz, E.
+AU  - Ravichandran, D.
+PY  - 2003//
+TI  - Multiple-Engine Question Answering in TextMap
+BT  - In Proceedings of TREC 2003
+SP  - 772
+EP  - 781
+CY  - Gaithersburg, Maryland
+ID  - d1e220
+ER  - 
+TY  - CHAP
+AU  - Greenwood, M. A.
+PY  - 2004//
+TI  - AnswerFinder: Question Answering from your Desktop
+BT  - In Proceedings of the Seventh Annual Colloquium for the UK Special Interest Group for Computational Linguistics (CLUK .04)
+ID  - d1e307
+ER  - 
+TY  - CHAP
+AU  - Harabagiu, S.
+AU  - Moldovan, D.
+AU  - Clark, C.
+AU  - Bowden, M.
+AU  - Williams, J.
+AU  - Bensley, J.
+PY  - 2003//
+TI  - Answer Mining by Combining Extraction Techniques with Abductive Reasoning
+BT  - In Proceedings of TREC 2003
+SP  - 375
+EP  - 382
+CY  - Gaithersburg, Maryland
+ID  - d1e341
+ER  - 
+TY  - CHAP
+AU  - Hermjakob, U.
+PY  - 2001//
+TI  - Parsing and Question Classification for Question Answering
+BT  - In Proceedings of the ACL Workshop on Open-Domain Question Answering
+CY  - Toulouse, France
+ID  - d1e394
+ER  - 
+TY  - CHAP
+AU  - Ittycheriah, A.
+AU  - Franz, M.
+AU  - Zhu, W-J
+AU  - Ratnaparkhi, A.
+PY  - 2001//
+TI  - Question Answering Using Maximum Entropy Components
+BT  - In Proceedings of NAACL 2001
+CY  - Pittsburgh, Pennsylvania
+ID  - d1e428
+ER  - 
+TY  - CHAP
+AU  - Krishnan, V.
+AU  - Das, S.
+AU  - Chakrabarti, S.
+PY  - 2005//
+TI  - Enhanced Answer Type Inference from Questions using Sequential Models
+BT  - In Proceedings of HLT/EMNLP 2005
+SP  - 315
+EP  - 322
+CY  - Vancouver, British Columbia, Canada
+ID  - d1e515
+ER  - 
+TY  - CHAP
+AU  - Lin, D.
+PY  - 1998//
+TI  - Automatic Retrieval and Clustering of Similar Words
+BT  - In Proceedings of COLING-ACL
+CY  - Montreal, Qu´ebec, Canada
+ID  - d1e687
+ER  - 
+TY  - CHAP
+AU  - Lin, D.
+PY  - 2001//
+TI  - Language and Text Analysis Tools
+BT  - In Proceedings of HLT
+SP  - 222
+EP  - 227
+CY  - San Diego, California
+ID  - d1e721
+ER  - 
+TY  - CHAP
+AU  - Moll´a, D.
+AU  - Hutchinson, B.
+PY  - 2003//
+TI  - Intrinsic versus Extrinsic Evaluations of Parsing Systems
+BT  - In Proceedings of EACL Workshop on Evaluation Initiatives in Natural Language Processing
+SP  - 43
+EP  - 50
+CY  - Budapest, Hungary
+ID  - d1e808
+ER  - 
+TY  - CHAP
+AU  - Pantel, P.
+AU  - Lin, D.
+PY  - 2002//
+TI  - Document Clustering with Committees
+BT  - In Proceedings of SIGIR 2002
+SP  - 199
+EP  - 206
+CY  - Tampere, Finland
+ID  - d1e842
+ER  - 
+TY  - CHAP
+AU  - Pereira, F.
+AU  - Tishby, N.
+AU  - Lee, L.
+PY  - 1993//
+TI  - Distributional Clustering of English Words
+BT  - In Proceedings of ACL
+SP  - 183
+EP  - 190
+ID  - d1e882
+ER  - 
+TY  - CHAP
+AU  - Radev, D.
+AU  - Fan, W.
+AU  - Qi, H.
+AU  - Wu, H.
+AU  - Grewal, A.
+PY  - 2002//
+TI  - Probablistic Question Answering on the Web
+BT  - In Proceedings of the Eleventh International World Wide Web Conference
+ID  - d1e926
+ER  - 
+TY  - CHAP
+AU  - Voorhees, E. M.
+PY  - 2003//
+TI  - Overview of the TREC
+BT  - In Proceedings of TREC 2003
+CY  - Gaithersburg, Maryland
+ID  - d1e969
+ER  - 
