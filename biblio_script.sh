@@ -61,17 +61,16 @@ def process_argv(argv):
     else:
       assert False, "unhandled mode"
 
+  # get inp_file, out_dir & check validity
   inp_file = ""
   out_dir = ""
   if(len(args) > 1):
     inp_file = args[0]
     out_dir = args[1]
- 
-  if(inp_file == "" or out_dir == ""):
-    sys.stderr.write("#! Empty inp_file \"%s\" or out_dir \"%s\"" %(inp_file, out_dir))
+  else:
     usage()
     sys.exit(1)
-
+ 
   sys.stderr.write("# (mode, outputType, inputFile, outDir) = (\"%s\", \"%s\", \"%s\", \"%s\")\n" %(mode, out_type, inp_file, out_dir))
 
   # check if the input file exists
