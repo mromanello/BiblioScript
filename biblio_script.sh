@@ -6,7 +6,7 @@ import os,sys,getopt,re
 # paths to executables 
 # Thang v100901: minor modifications in the code so that it doesn't matter if the below directory paths end with / or not
 PARSCIT_PATH="/Applications/ParsCit/bin/"
-BUTILS_PATH="/Applications/bibutils_4.8/"
+BIBUTILS_PATH="/Applications/bibutils_4.8/"
 SAXON_PATH="/Applications/saxonhe9-2-1-2j/saxon9he.jar"
 
 # paths to resources
