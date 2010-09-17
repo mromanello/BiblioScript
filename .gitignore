@@ -4,6 +4,6 @@ git_commit.sh
 *thang.sh
 *swp
 *~
-tmp/*
+tmp*/*
 test/*.cite
 test/*.body
