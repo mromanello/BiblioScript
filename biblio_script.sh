@@ -12,28 +12,32 @@ SAXON_PATH=sys.path[0] + "/saxonhe9-2-1-2j/saxon9he.jar"
 # paths to resources
 XSLT_TRANFORM_PATH=sys.path[0] + "/parscit2mods.xsl"
 
-def parscit_to_mods(parscit_out):
+def parscit_to_mods(parscit_out, is_quiet):
 	saxon_cmd="java -jar %s -xsl:%s -s:%s" %(SAXON_PATH,XSLT_TRANFORM_PATH,parscit_out)
 	out=os.popen(saxon_cmd).readlines()
-	print "Transforming Parscit's output into mods xml..."
+        if is_quiet == "no":
+	  print "Transforming Parscit's output into mods xml..."
 	return out
 	
-def export_mods(mods_xml, out_type):
+def export_mods(mods_xml, out_type, is_quiet):
 	bibutils_cmd="%s/xml2%s %s"%(BIBUTILS_PATH, out_type, mods_xml) # Thang v100901: modify to add multiple export format
-	out=os.popen(bibutils_cmd).readlines()
+	
+        if is_quiet == "yes": bibutils_cmd = "%s 2>/dev/null" %(bibutils_cmd)
+        out=os.popen(bibutils_cmd).readlines()
 	return out
 
 def usage():
-	print "Usage: %s [-h] [-i <inputType>] [-o <outputType>] <inputFile> <outDir>" %(sys.argv[0])
+	print "Usage: %s [-h] [-q] [-i <inputType>] [-o <outputType>] <inputFile> <outDir>" %(sys.argv[0])
         print "Options:"
-        print "\t-h\tPrint this mesage"
+        print "\t-h\tPrint this message"
+        print "\t-q\tDo not pritn log message"
         print "\t-i <inputType>\tType=\"all\" (full-text input),\"ref\" (input contains only individual reference strings, one per line), or \"mods\" (ParsCit extraction step will be skipped to reuse MODS file) (default=\"ref\")"
         print "\t-o <outputType>\tType=(ads|bib|end|isi|ris|wordbib) (default=bib)"
 
 # Thang v100901: process argv array using getopt
 def process_argv(argv):
   try:
-    opts, args = getopt.getopt(argv[1:], "hi:o:", ["help", "input=", "output="])
+    opts, args = getopt.getopt(argv[1:], "hqi:o:", ["help", "quiet", "input=", "output="])
   except getopt.GetoptError, err:
     print str(err)
     usage()
@@ -41,11 +45,14 @@ def process_argv(argv):
 
   in_type = "ref"
   out_type = "bib"
+  is_quiet = "no"
 
   for o, a in opts:
     if o in ("-h", "--help"):
       usage()
       sys.exit()
+    elif o in ("-q", "--quiet"):
+      is_quiet = "yes" 
     elif o in ("-i", "--input"):
       in_type = a
       if(not re.match("(all|ref|mods)", in_type)):
@@ -71,7 +78,7 @@ def process_argv(argv):
     usage()
     sys.exit(1)
 
-  sys.stderr.write("# (in_type, outputType, inputFile, outDir) = (\"%s\", \"%s\", \"%s\", \"%s\")\n" %(in_type, out_type, inp_file, out_dir))
+  if is_quiet == "no": sys.stderr.write("# (in_type, outputType, inputFile, outDir) = (\"%s\", \"%s\", \"%s\", \"%s\")\n" %(in_type, out_type, inp_file, out_dir))
 
   # check if the input file exists
   if not os.path.isfile(inp_file):
@@ -80,17 +87,17 @@ def process_argv(argv):
   
   # check if directory exists, create if not:
   if not os.path.exists(out_dir):
-    sys.stderr.write("#! Directory \"%s\" doesn't exist. Creating ...\n" % out_dir)
+    if is_quiet == "no": sys.stderr.write("#! Directory \"%s\" doesn't exist. Creating ...\n" % out_dir)
     os.makedirs(out_dir)
 
-  return (out_type, in_type, inp_file, out_dir)
+  return (out_type, in_type, inp_file, out_dir, is_quiet)
 # End Thang v100901: process argv array
 
 ############
 ### MAIN ###
 ############
-(out_type, in_type, inp_file, out_dir) = process_argv(sys.argv)
-print "# Extracting references from the input file..."
+(out_type, in_type, inp_file, out_dir, is_quiet) = process_argv(sys.argv)
+if is_quiet == "no": print "# Extracting references from the input file... "
 
 # Thang v100901: handle in_type
 if (in_type == "ref"):
@@ -109,7 +116,7 @@ if(in_type != "mods"):
 if(in_type != "mods"):
   parscit_mods='%s/parscit_mods.xml'%out_dir
   file = open(parscit_mods,'w')
-  for line in parscit_to_mods(parscit_xml):
+  for line in parscit_to_mods(parscit_xml, is_quiet):
 	file.write(line)
   file.close()
 else: # already an MODS file, copy over
@@ -118,9 +125,10 @@ else: # already an MODS file, copy over
 # transform mods intermediate xml into other export format
 # Thang v100901: modify to handle multiple format 
 export_file='%s/parscit.%s' %(out_dir, out_type)
-print "# Transforming intermediate mods xml into %s format. Output to %s ..." % (out_type, export_file)
+if is_quiet == "no": print "# Transforming intermediate mods xml into %s format. Output to %s ..." % (out_type, export_file)
+
 file = open(export_file,'w')
-for line in export_mods(parscit_mods, out_type):
+for line in export_mods(parscit_mods, out_type, is_quiet):
 	file.write(line)
 file.close()
 
